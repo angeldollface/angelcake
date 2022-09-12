@@ -1,0 +1,36 @@
+[package]
+name = "angelcake"
+version = "1.0.0"
+edition = "2021"
+license = "MIT"
+authors = ["Angel Dollface"]
+description= "A tasty way to execute build tasks."
+homepage = "https://github.com/angeldollface/angelcake"
+repository = "https://github.com/angeldollface/angelcake"
+documentation = "https://github.com/angeldollface/angelcake"
+readme = "README.markdown"
+keywords = [
+  "task",
+  "build"
+]
+categories = [
+  "command-line-utilities",
+  "development-tools",
+  "development-tools::cargo-plugins",
+  "development-tools::build-utils",
+  "development-tools::testing"
+]
+exclude = [
+  "/.github"
+]
+
+[dependencies]
+cleasy = "1.0.0"
+colored = "2.0.0"
+angelmarkup = "1.1.0"
+
+[profile.release]
+strip = true
+opt-level = "s"
+lto = true
+codegen-units = 1
