@@ -2,7 +2,7 @@
 
 ![Angelcake CI](https://github.com/angeldollface/angelcake/actions/workflows/rust.yml/badge.svg) :angel: :cake:
 
-***A tasty way to execute build tasks.*** :angel: :cake:
+***A tasty way to execute build tasks. :angel: :cake:***
 
 ## ABOUT :books:
 
