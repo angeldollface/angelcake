@@ -25,7 +25,7 @@ exclude = [
 ]
 
 [[bin]]
-name = "ac"
+name = "angelcake"
 path = "src/main.rs"
 
 [dependencies]
