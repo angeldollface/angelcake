@@ -7,7 +7,10 @@ use std::str;
 use cleasy::App;
 use angelmarkup::*;
 use colored::Colorize;
+use ferrimoji::get_emoji;
 use std::process::Command;
+use std::time::SystemTime;
+use std::time::UNIX_EPOCH;
 use std::collections::HashMap;
 
 /// Library-wide constants.
@@ -15,9 +18,18 @@ pub fn constants() -> HashMap<String, String> {
     let mut data: HashMap<String, String> = HashMap::new();
     data.insert(String::from("build_file"), String::from("Cakefile"));
     data.insert(String::from("author"), String::from("Alexander Abraham"));
-    data.insert(String::from("version"), String::from("1.0.0"));
+    data.insert(String::from("version"), String::from("1.1.0"));
     data.insert(String::from("name"), String::from("Angelcake"));
     return data;
+}
+
+/// Returns the seconds elapsed since the Unix 
+/// epoch as a string.
+pub fn get_time_since_epoch() -> u128 {
+    let mut result: u128 = 0;
+    let start = SystemTime::now();
+    let since_the_epoch: u128 = start.duration_since(UNIX_EPOCH).unwrap().as_millis();
+    return result;
 }
 
 /// Runs a command and returns STDOUT as a string.
@@ -61,6 +73,7 @@ pub fn run(routine: String){
 
 /// ANGELCAKE's CLI.
 pub fn cli(){
+    get_time_since_epoch();
     let mut angelcake: App = App::new(
         constants()["name"].clone(),
         constants()["version"].clone(),
@@ -74,8 +87,27 @@ pub fn cli(){
         println!("{}", format!("{}",angelcake.help()).cyan().to_string());
     }
     else if angelcake.arg_was_used("runr".to_string()) == true {
+        let hammer_emoji: String = get_emoji(String::from("hammer"));
+        let cake_emoji: String = get_emoji(String::from("cake"));
+        let bomb_emoji: String = get_emoji(String::from("bomb"));
         let arg_data: String = angelcake.get_arg_data("runr".to_string());
+        let execution_string: String = format!(
+            "{} {} Running task '{}'.", 
+            hammer_emoji, 
+            cake_emoji, 
+            arg_data
+        ).cyan().to_string();
+        let now: u128 = get_time_since_epoch();
+        println!("{}", execution_string);
         run(arg_data);
+        let then: u128 = get_time_since_epoch();
+        let duration: u128 = then - now;
+        let duration_string: String = format!(
+            "{} Operation completed in {} milliseconds.", 
+            bomb_emoji, 
+            duration.to_string()
+        ).cyan().to_string();
+        println!("{}", duration_string);
     }
     else {
         println!("{}", format!("{}",angelcake.help()).red().to_string());

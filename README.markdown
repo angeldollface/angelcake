@@ -39,7 +39,7 @@ To use ***ANGELCAKE***, you will need to do two steps:
 ***ANGELCAKE*** uses the same syntax as Angel Markup. Here's an example:
 
 ```text
-% This is a comment.
+# This is a comment.
 'greet' => 'echo Hello World!'
 ```
 
