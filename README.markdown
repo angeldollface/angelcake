@@ -61,6 +61,19 @@ You should see this output:
 Hello World!
 ```
 
+## CHANGELOG :black_nib:
+
+### Version 1.0.0
+
+- Initial release.
+- Upload to GitHub.
+
+### Version 1.1.0
+
+- Re-upload under my new name.
+- Verbose output.
+- Operation timing.
+
 ## NOTE :scroll:
 
 - *Angel Cake :angel: :cake:* by Alexander Abraham :black_heart: a.k.a. *"Angel Dollface" :dolls: :ribbon:*

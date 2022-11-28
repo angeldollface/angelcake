@@ -7,10 +7,10 @@ use std::str;
 use cleasy::App;
 use angelmarkup::*;
 use colored::Colorize;
+use std::time::Instant;
+use std::time::Duration;
 use ferrimoji::get_emoji;
 use std::process::Command;
-use std::time::SystemTime;
-use std::time::UNIX_EPOCH;
 use std::collections::HashMap;
 
 /// Library-wide constants.
@@ -21,15 +21,6 @@ pub fn constants() -> HashMap<String, String> {
     data.insert(String::from("version"), String::from("1.1.0"));
     data.insert(String::from("name"), String::from("Angelcake"));
     return data;
-}
-
-/// Returns the seconds elapsed since the Unix 
-/// epoch as a string.
-pub fn get_time_since_epoch() -> u128 {
-    let mut result: u128 = 0;
-    let start = SystemTime::now();
-    let since_the_epoch: u128 = start.duration_since(UNIX_EPOCH).unwrap().as_millis();
-    return result;
 }
 
 /// Runs a command and returns STDOUT as a string.
@@ -73,7 +64,6 @@ pub fn run(routine: String){
 
 /// ANGELCAKE's CLI.
 pub fn cli(){
-    get_time_since_epoch();
     let mut angelcake: App = App::new(
         constants()["name"].clone(),
         constants()["version"].clone(),
@@ -97,15 +87,14 @@ pub fn cli(){
             cake_emoji, 
             arg_data
         ).cyan().to_string();
-        let now: u128 = get_time_since_epoch();
+        let now: Instant = Instant::now();
         println!("{}", execution_string);
         run(arg_data);
-        let then: u128 = get_time_since_epoch();
-        let duration: u128 = then - now;
+        let duration = now.elapsed();
         let duration_string: String = format!(
-            "{} Operation completed in {} milliseconds.", 
+            "{} Operation completed in {:?}.", 
             bomb_emoji, 
-            duration.to_string()
+            duration
         ).cyan().to_string();
         println!("{}", duration_string);
     }
